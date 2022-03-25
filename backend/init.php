@@ -5,7 +5,7 @@ spl_autoload_register(function($class){
 });
 
 //Load env file
-(new DotEnv(dirname(__DIR__.'../') . DIRECTORY_SEPARATOR . '.env'))->load();
+//(new DotEnv(dirname(__DIR__.'../') . DIRECTORY_SEPARATOR . '.env'))->load();
 
 $userObj = new Users;
 
