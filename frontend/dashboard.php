@@ -2,7 +2,14 @@
 include '../backend/init.php';
 $user = $userObj->userData();
 $blog = $userObj->get('blogs', ['blogID' => 1]);
-echo $blog->Title;
+if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
+    $blogID = (int) $_GET['blogID'];
+    $blog = $dashObj->blogAuth($blogID);
+
+    if(!$blog) {
+        header("Location: 404");
+    }
+}
 ?>
 
 <!DOCTYPE HTML>
