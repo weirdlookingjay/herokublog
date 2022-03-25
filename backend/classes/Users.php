@@ -19,4 +19,9 @@ class Users
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }
+
+    public function isLogged()
+    {
+        return ((isset($_SESSION['user_id'])) ? true : false);
+    }
 }
