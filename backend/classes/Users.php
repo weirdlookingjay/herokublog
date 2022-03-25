@@ -37,4 +37,20 @@ class Users
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
+
+    public function get($table, $fields)
+    {
+        $where = " WHERE ";
+        $sql = "SELECT * FROM {$table}";
+        foreach($fields as $key => $value) {
+            $sql .= "{$where} {$key} = :{$key}";
+        }
+        if($stmt = $this->db->prepare($sql)) {
+            foreach($fields as $key => $value) {
+                $stmt->bindValue(":{$key}", $value);
+            }
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+    }
 }
