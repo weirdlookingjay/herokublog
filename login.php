@@ -1,7 +1,7 @@
 <?php
 include 'backend/init.php';
 
-if($userObj->isLogged()) {
+if($userObj->isLoggedIn()) {
     header("Location: frontend/dashboard.php");
 }
 
