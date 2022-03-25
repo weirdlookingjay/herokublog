@@ -5,5 +5,6 @@ spl_autoload_register(function($class){
 });
 
 //Load enf file
-(new DotEnv(dirname(__DIR__.'../') . DIRECTORY_SEPARATOR . '.env'))->load();
+//(new DotEnv(dirname(__DIR__.'../') . DIRECTORY_SEPARATOR . '.env'))->load();
 
+echo dirname(__DIR__.'../') . DIRECTORY_SEPARATOR . '.env';
