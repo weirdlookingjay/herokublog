@@ -1,3 +1,26 @@
+<?php
+include 'backend/init.php';
+
+if($_SERVER['REQUEST_METHOD'] === "POST") {
+    if(isset($_POST['login'])) {
+        $email = Validate::escape($_POST['email']);
+        $password = $_POST['password'];
+
+        if(!empty($email) && !empty($password)) {
+            if(!Validate::filterEmail($email)) {
+                $error = "Invalid Email Address Format.";
+            } else {
+                if($user = $userObj->emailExist($email)) {
+                    echo $user->fullName;
+                }
+            }
+        } else {
+            $error = "Please enter your email and password.";
+        }
+    }
+}
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -34,7 +57,7 @@
                                 <span class="in-span">
 								<i class="fas fa-lock"></i>
 							</span>
-                                <div>Here will be error</div>
+                                <div><?php if(isset($error)) echo $error; ?></div>
                             </div>
                         </div>
                     </div>
