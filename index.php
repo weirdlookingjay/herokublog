@@ -1,3 +1,2 @@
 <?php
-
-echo "Home Page";
+include 'backend/init.php';
