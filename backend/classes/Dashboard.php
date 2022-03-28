@@ -104,16 +104,18 @@ class Dashboard
         }
     }
 
-    public function getPostLabels($postID, $blogID) {
-        $stmt = $this->db->prepare("SELECT * FROM `labels` WHERE `postID` = :postID AND `blogID` = :blogID");
+    public function getPostLabels($postID, $blogID)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM labels WHERE postID =:postID AND
+blogID =:blogID");
         $stmt->bindParam(":postID", $postID, PDO::PARAM_INT);
         $stmt->bindParam(":blogID", $blogID, PDO::PARAM_INT);
         $stmt->execute();
         $labels = $stmt->fetchAll(PDO::FETCH_OBJ);
         $i = 1;
-        $return = '';
-        foreach($labels as $label) {
-            $return .= '<li><a href="#">'.$label->labelName.'</a></li>'.(($i < count($labels)) ? ', ' : '');
+        $return = "";
+        foreach ($labels as $label) {
+            $return .= '<li><a href="#">' . $label->labelName . '</a></li>' . (($i < count($labels)) ? ',' : '');
             $i++;
         }
         return $return;
