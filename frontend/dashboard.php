@@ -239,7 +239,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                         <!--main-right-Content-->
                         <div id="posts" class="main-right-content fl-4">
                             <!-- POSTS -->
-                            {POSTS}
+                            <?php $dashObj->getAllPosts('Post', '', $blog->blogID); ?>
                         </div>
                         <!-- JS FILES -->
                     </div>
