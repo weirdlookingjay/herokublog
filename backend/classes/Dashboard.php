@@ -68,7 +68,7 @@ class Dashboard
 </div>
 </div>
 <div class="pl-head-right">
-<span>' . (($post->postStatus === 'draft') ? 'draft' : '') . '</span> 
+<span>'.(($post->postStatus === 'draft') ? 'draft' : '').'</span> 
 
 </div>
 </div>
@@ -83,7 +83,7 @@ class Dashboard
 <div class="post-in-right">
 <div class="p-in-right flex fl-1">
 <div class="pl-auth-name"><span>
-<a href="javascript:;">' ."Hello ". $post->fullName . '</a></span>
+<a href="javascript:;">'. $post->fullName .'</a></span>
 </div>
 <div class="pl-cm-count">
 <span>0</span>
