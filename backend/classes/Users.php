@@ -86,4 +86,31 @@ class Users
             $stmt->execute();
         }
     }
+
+    public function update($table, $fields = array(), $condition = array()){
+        $columns = '';
+        $where   = " WHERE ";
+        $i       = 1;
+        foreach($fields as $key => $value){
+            $columns .= "`{$key}` = :{$key}";
+            if($i < count($fields)){
+                $columns .= ", ";
+            }
+            $i++;
+        }
+        $sql = "UPDATE `{$table}` SET {$columns}";
+        foreach ($condition as $key => $value) {
+            $sql .= "{$where} `{$key}` = :{$key}";
+            $where = " AND ";
+        }
+        if($stmt = $this->db->prepare($sql)){
+            foreach ($fields as $key => $value) {
+                $stmt->bindValue(":{$key}", $value);
+                foreach ($condition as $key => $value) {
+                    $stmt->bindValue(":{$key}", $value);
+                }
+            }
+            $stmt->execute();
+        }
+    }
 }
