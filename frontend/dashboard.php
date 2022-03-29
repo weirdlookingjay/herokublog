@@ -1,15 +1,16 @@
 <?php
 include '../backend/init.php';
+
 $user = $userObj->userData();
+
 $blog = $userObj->get('blogs', ['blogID' => 1]);
+
 if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
     $blogID = (int) $_GET['blogID'];
     $blog = $dashObj->blogAuth($blogID);
 
-    echo $dashObj->getPostLabels('1', '1');
-
     if(!$blog) {
-        header("Location: 404");
+        header('Location: 404');
     }
 }
 ?>
@@ -194,12 +195,12 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                                                     <li>
                                                         <a href="javascript:;" id="newLabel">New label...</a>
                                                     </li>
-                                                    {LABEL MENU}
+                                                    <?php $dashObj->getLabelsMenu($blog->blogID); ?>
                                                 </ul>
                                             </div>
 
                                             <button id="publishBtn">Publish</button>
-                                            <button id="draftBtn">Revert to darft</button>
+                                            <button id="draftBtn">Revert to draft</button>
                                             <button id="deleteBtn"><i class="fas fa-trash"></i></button>
                                         </div>
                                     </div>
@@ -244,6 +245,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                             <?php $dashObj->getAllPosts('Post', '', $blog->blogID); ?>
                         </div>
                         <!-- JS FILES -->
+                        <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/labelMenu.js"></script>
                     </div>
                     <!--MAIN-Right-inner-DIV-ENDS-HERE-->
                 </div>

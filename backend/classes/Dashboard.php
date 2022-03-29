@@ -119,8 +119,7 @@ class Dashboard
 
     public function getPostLabels($postID, $blogID)
     {
-        $stmt = $this->db->prepare("SELECT * FROM labels WHERE postID =:postID AND
-blogID =:blogID");
+        $stmt = $this->db->prepare("SELECT * FROM `labels` WHERE `postID` =:postID AND `blogID` =:blogID");
         $stmt->bindParam(":postID", $postID, PDO::PARAM_INT);
         $stmt->bindParam(":blogID", $blogID, PDO::PARAM_INT);
         $stmt->execute();
@@ -133,4 +132,16 @@ blogID =:blogID");
         }
         return $return;
     }
+
+    public function getLabelsMenu($blogId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM labels WHERE blogID =:blogId GROUP BY labelName ");
+        $stmt->bindParam(":blogId", $blogId, PDO::PARAM_INT);
+        $stmt->execute();
+        $labels = $stmt->fetchAll(PDO::FETCH_OBJ);
+        foreach ($labels as $label) {
+            echo '<li class="label" data-id"' . $label->ID . '"><a href="javascript:;">' . $label->labelName . '</a></li>';
+        }
+    }
+
 }
