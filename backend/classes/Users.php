@@ -44,6 +44,7 @@ class Users
         $sql = "SELECT * FROM {$table}";
         foreach($fields as $key => $value) {
             $sql .= "{$where} {$key} = :{$key}";
+            $where = " AND ";
         }
         if($stmt = $this->db->prepare($sql)) {
             foreach($fields as $key => $value) {
@@ -65,7 +66,7 @@ class Users
                 $stmt->bindValue(":{$key}", $value);
             }
             $stmt->execute();
-            $stmt->db->lastInsertId();
+            $this->db->lastInsertId();
         }
     }
 
@@ -75,7 +76,7 @@ class Users
 
         foreach($fields as $key => $value) {
             $sql .= "{$where} `{$key}` = :{$key} ";
-            $where = "AND";
+            $where = "AND ";
         }
 
         if($stmt = $this->db->prepare($sql)) {

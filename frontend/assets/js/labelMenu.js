@@ -37,8 +37,8 @@ button.addEventListener("click", function(event) {
                     var httpRequest = new XMLHttpRequest();
 
                     if (httpRequest) {
-                        httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/addLabel.php', true);
-                        // httpRequest.open('POST', 'http://herokublog.local/backend/ajax/addLabel.php', true);
+                        //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/addLabel.php', true);
+                        httpRequest.open('POST', 'http://herokublog.local/backend/ajax/addLabel.php', true);
                         httpRequest.onreadystatechange = function() {
                             if (this.readyState === 4 && this.status === 200) {
                                 location.reload(true);
@@ -61,3 +61,41 @@ button.addEventListener("click", function(event) {
         }
     }
 });
+
+label.forEach(function (el) {
+    el.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var checkBox = document.querySelectorAll(".postCheckBox");
+        var array = new Array();
+        checkBox.forEach(function (el) {
+            if (el.checked) {
+                array.push(el.value);
+            }
+        });
+        if (array.length > 0) {
+            //ajax
+            var formData = new FormData();
+            formData.append("newLabel", el.textContent);
+            formData.append("postID", JSON.stringify(array));
+            formData.append("blogID", blogID);
+            var httpRequest = new XMLHttpRequest();
+
+            if (httpRequest) {
+                httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/addLabel.php', true);
+                // httpRequest.open('POST', 'http://herokublog.local/backend/ajax/addLabel.php', true);
+                httpRequest.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        location.reload();
+                    }
+                }
+                httpRequest.send(formData);
+            }
+
+        } else {
+            alert("No posts are selected!");
+            location.reload(true);
+        }
+    });
+});
+
