@@ -18,7 +18,9 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
 
                             if($label) {
                                 //delete Label
+                                $userObj->delete('labels', ['labelName' => $label->labelName, 'postID' => $postID, 'blogID' => $blogID]);
                             } else {
+                                //Create label
                                 $userObj->create('labels', ['labelName' => $newLabel, 'postID' => $postID, 'blogID' => $blogID]);
                             }
                         }

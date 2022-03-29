@@ -68,4 +68,21 @@ class Users
             $stmt->db->lastInsertId();
         }
     }
+
+    public function delete($table, $fields = array()) {
+        $sql = "DELETE FROM `{$table}`";
+        $where = " WHERE ";
+
+        foreach($fields as $key => $value) {
+            $sql .= "{$where} `{$key}` = :{$key} ";
+            $where = "AND";
+        }
+
+        if($stmt = $this->db->prepare($sql)) {
+            foreach($fields as $key => $value) {
+                $stmt->bindValue(":{$key}", $value);
+            }
+            $stmt->execute();
+        }
+    }
 }
