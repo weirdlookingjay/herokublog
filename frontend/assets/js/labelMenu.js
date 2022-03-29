@@ -37,8 +37,8 @@ button.addEventListener("click", function(event) {
                     var httpRequest = new XMLHttpRequest();
 
                     if (httpRequest) {
-                        //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/addLabel.php', true);
-                        httpRequest.open('POST', 'http://herokublog.local/backend/ajax/addLabel.php', true);
+                        httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/addLabel.php', true);
+                        //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/addLabel.php', true);
                         httpRequest.onreadystatechange = function() {
                             if (this.readyState === 4 && this.status === 200) {
                                 location.reload(true);
@@ -83,7 +83,7 @@ label.forEach(function (el) {
 
             if (httpRequest) {
                 httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/addLabel.php', true);
-                // httpRequest.open('POST', 'http://herokublog.local/backend/ajax/addLabel.php', true);
+                //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/addLabel.php', true);
                 httpRequest.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
                         location.reload();
@@ -99,3 +99,16 @@ label.forEach(function (el) {
     });
 });
 
+checkAll.addEventListener("change", function(e) {
+    var checkBox = document.querySelectorAll(".postCheckBox");
+
+    checkBox.forEach(function(el) {
+        el.checked = true;
+    });
+
+    if (this.checked === false) {
+        checkBox.forEach(function(el) {
+            el.checked = false;
+        });
+    }
+});
