@@ -36,7 +36,7 @@ button.addEventListener("click", function(event) {
 
                    if(httpRequest) {
                        // httpRequest.open('POST', BASE_URL_DEV+'backend/ajax/addLabel.php', true);
-                       httpRequest.open('POST', BASE_URL_PROD+'backend/ajax/addLabel.php', true);
+                       httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/addLabel.php', true);
                        httpRequest.onreadystatechange = function() {
                            if(this.readyState === 4 && this.status === 200) {
                                location.reload(true);
