@@ -151,4 +151,23 @@ class Dashboard
             echo '<li class="label" data-id"' . $label->ID . '"><a href="javascript:;">' . $label->labelName . '</a></li>';
         }
     }
+
+	public function getPostsCount($type, $status, $blogID){
+    	if($status === '') {
+    		$sql = "SELECT * FROM `posts` WHERE `postType` = :type AND `blogID` = :blogID";
+	    } else {
+		    $sql = "SELECT * FROM `posts` WHERE `postType` = :type AND `postStatus` = :status AND `blogID` = :blogID";
+	    }
+
+    	$stmt = $this->db->prepare($sql);
+    	$stmt->bindParam(":type", $type, PDO::PARAM_STR);
+		($status !== '') ? $stmt->bindParam(":status", $status, PDO::PARAM_STR) : '';
+		$stmt->bindParam(":blogID", $blogID, PDO::PARAM_INT);
+		$stmt->execute();
+		$data = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+		if($data) {
+			echo " ({$stmt->rowCount()})";
+		}
+    }
 }

@@ -129,14 +129,14 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                                 <li class="active"><span><i class="fas fa-newspaper"></i></span><a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/{BLOG-ID}/dashboard/">Posts</a></li>
                                 <ul>
                                     <li id="active" class="active">
-                                        <a href="{BASE_URL}admin/blogID/{BLOG-ID}/dashboard/">All{COUNT}
+                                        <a href="{BASE_URL}admin/blogID/{BLOG-ID}/dashboard/">All<?php echo $dashObj->getPostsCount('Post', '', $blogID); ?>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="?type=draft" id="draft">Draft{COUNT}</a>
+                                        <a href="?type=draft" id="draft">Draft<?php echo $dashObj->getPostsCount('Post', 'draft', $blogID); ?></a>
                                     </li>
                                     <li>
-                                        <a href="?type=published" id="published">Published{COUNT}</a>
+                                        <a href="?type=published" id="published">Published<?php echo $dashObj->getPostsCount('Post', 'published', $blogID); ?></a>
                                     </li>
                                 </ul>
 
