@@ -34,7 +34,7 @@ class Dashboard
         } else {
             $sql = "SELECT * FROM posts LEFT JOIN users ON userID = authorID
         WHERE postType = :type AND postStatus =:status AND blogID = :blogID ORDER BY postID
-        DESC LIMIT :offset,:postLimit";
+        DESC LIMIT 10";
         }
 
         $stmt = $this->db->prepare($sql);

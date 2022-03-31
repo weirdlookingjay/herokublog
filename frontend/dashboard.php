@@ -126,10 +126,10 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                     <div class="main-left-inner flex fl-c fl-1">
                         <div class="main-menu fl-4">
                             <ul>
-                                <li class="active"><span><i class="fas fa-newspaper"></i></span><a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/{BLOG-ID}/dashboard/">Posts</a></li>
+                                <li class="active"><span><i class="fas fa-newspaper"></i></span><a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/dashboard/">Posts</a></li>
                                 <ul>
                                     <li id="active" class="active">
-                                        <a href="{BASE_URL}admin/blogID/{BLOG-ID}/dashboard/">All<?php echo $dashObj->getPostsCount('Post', '', $blogID); ?>
+                                        <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/dashboard/">All<?php echo $dashObj->getPostsCount('Post', '', $blogID); ?>
                                         </a>
                                     </li>
                                     <li>
@@ -141,22 +141,22 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                                 </ul>
 
                                 <li><span><i class="far fa-chart-bar"></i></span>
-                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/{BLOG-ID}/dashboard/stats">Stats</a>
+                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/dashboard/stats">Stats</a>
                                 </li>
                                 <li><span><i class="fas fa-comment"></i></span>
-                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/{BLOG-ID}/dashboard/comments">Comments</a>
+                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/dashboard/comments">Comments</a>
                                 </li>
                                 <li><span><i class="far fa-copy"></i></span>
-                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/{BLOG-ID}/dashboard/pages">Pages</a>
+                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/dashboard/pages">Pages</a>
                                 </li>
                                 <li><span><i class="fas fa-object-group"></i></span>
-                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/{BLOG-ID}/dashboard/layout">Layout</a>
+                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/dashboard/layout">Layout</a>
                                 </li>
                                 <li><span><i class="fas fa-pager"></i></span>
-                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/{BLOG-ID}/template/edit">Template</a>
+                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/template/edit">Template</a>
                                 </li>
                                 <li><span><i class="fas fa-cog"></i></span>
-                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/{BLOG-ID}/dashboard/settings">Settings</a>
+                                    <a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/dashboard/settings">Settings</a>
                                 </li>
                             </ul>
                         </div>
@@ -242,7 +242,16 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                         <!--main-right-Content-->
                         <div id="posts" class="main-right-content fl-4">
                             <!-- POSTS -->
-                            <?php $dashObj->getAllPosts('Post', '', $blog->blogID); ?>
+                            <?php
+                            if(strpos($_SERVER['REQUEST_URI'], '?type=published')) {
+	                            $dashObj->getAllPosts('Post', 'published', $blog->blogID);
+                            } else if(strpos($_SERVER['REQUEST_URI'], '?type=draft')) {
+	                            $dashObj->getAllPosts('Post', 'draft', $blog->blogID);
+                            } else {
+	                            $dashObj->getAllPosts('Post', '', $blog->blogID);
+                            }
+
+                            ?>
                         </div>
                         <!-- JS FILES -->
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/labelMenu.js"></script>
