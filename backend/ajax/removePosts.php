@@ -17,9 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                             echo "You don't have rights to perform this action!";
                             break;
                         }
-                    } else {
-                        echo "Something went wrong!";
-                        break;
                     }
                 }
             }

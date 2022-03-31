@@ -117,6 +117,14 @@ class Dashboard
 
     }
 
+    public function searchPosts($search, $blogID) {
+        $stmt = $this->db->prepare("SELECT * FROM `posts`, `users` WHERE `authorID` = `userID` AND `title` LIKE ? AND `blogID` = ?");
+        $stmt->bindValue(1, '%'.$search.'%', PDO::PARAM_STR);
+        $stmt->bindValue(2, $blogID, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function getPostLabels($postID, $blogID)
     {
         $stmt = $this->db->prepare("SELECT * FROM `labels` WHERE `postID` =:postID AND `blogID` =:blogID");
@@ -143,5 +151,4 @@ class Dashboard
             echo '<li class="label" data-id"' . $label->ID . '"><a href="javascript:;">' . $label->labelName . '</a></li>';
         }
     }
-
 }
