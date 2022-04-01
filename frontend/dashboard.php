@@ -63,7 +63,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                 <div class="header-b-left fl-1">
                     <div>
                         <div class="b-h-div">
-                            <h4>BLOG TITLE</h4>
+                            <h4><?php echo $blog->Title; ?></h4>
                         </div>
                         <span>
 					<a href="javascript:;" id="blogListBtn">
@@ -84,7 +84,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                         </div>
                     </div>
                     <div>
-                        <a href="{SUBDOMAIN}" target="_blank">ViewBlog</a>
+                        <a href="http://<?php echo $blog->Domain;?>.<?php echo getenv('DOMAIN') ?>" target="_blank">ViewBlog</a>
                     </div>
                 </div>
                 <div class="header-b-right flex fl-4">
@@ -264,8 +264,8 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/labelMenu.js"></script>
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/postStatus.js"></script>
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/removePosts.js"></script>
-                        <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/searchPosts.js"></script>
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/postPagination.js"></script>
+                        <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/searchPosts.js"></script>
                     </div>
                     <!--MAIN-Right-inner-DIV-ENDS-HERE-->
                 </div>

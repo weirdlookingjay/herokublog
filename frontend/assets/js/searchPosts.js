@@ -37,7 +37,9 @@ search.addEventListener("keyup", function(event) {
                     if(this.responseText.length != 0) {
                         document.querySelector("#posts").innerHTML = this.responseText;
                         disableBtn();
-                    } else {
+                    }
+
+                    if(search.value === '') {
                         enableBtn();
                     }
                 }
