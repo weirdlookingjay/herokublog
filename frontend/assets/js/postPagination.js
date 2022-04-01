@@ -5,8 +5,19 @@ var postLimit = document.querySelector('#pageLimit');
 var previousBtn = document.querySelector('#previousPage');
 var nextBtn = document.querySelector('#nextPage');
 var currentPage = document.querySelector('#currentPageNum');
+var active = document.querySelector("#active");
 var postStatus = '';
 var blogID = nextBtn.dataset.blog;
+
+if(window.location.href.indexOf('draft') > -1) {
+    active.classList.remove('active');
+    document.querySelector("#draft").classList.add('active');
+    postStatus = 'draft';
+} else if(window.location.href.indexOf('published') > -1) {
+    active.classList.remove('active');
+    document.querySelector("#published").classList.add('active');
+    postStatus = 'published';
+}
 
 if(page.lastElementChild != null) {
     if(page.lastElementChild.innerHTML.trim() > 1) {
@@ -29,7 +40,7 @@ button.addEventListener("click", function(event) {
            var formData = new FormData();
            formData.append('blogID', blogID);
            formData.append('nextPage', el.innerHTML.trim());
-           formData.append('postLimit', 1);
+           formData.append('postLimit', postLimit.value);
            formData.append('postStatus', postStatus);
 
            var httpRequest = new XMLHttpRequest();
@@ -87,7 +98,7 @@ nextBtn.addEventListener("click", function(event) {
        var formData = new FormData();
        formData.append('blogID', blogID);
        formData.append('nextPage', currentNum);
-       formData.append('postLimit', 1);
+       formData.append('postLimit', postLimit.value);
        formData.append('postStatus', postStatus);
 
        var httpRequest = new XMLHttpRequest();
@@ -126,14 +137,14 @@ previousBtn.addEventListener("click", function(event) {
         var formData = new FormData();
         formData.append('blogID', blogID);
         formData.append('previousPage', currentNum);
-        formData.append('postLimit', 1);
+        formData.append('postLimit', postLimit.value);
         formData.append('postStatus', postStatus);
 
         var httpRequest = new XMLHttpRequest();
 
         if (httpRequest) {
-            //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showPreviousPosts.php', true);
-            httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showPreviousPosts.php', true);
+            httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showPreviousPosts.php', true);
+            //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showPreviousPosts.php', true);
             httpRequest.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     document.querySelector('#posts').innerHTML = this.responseText;

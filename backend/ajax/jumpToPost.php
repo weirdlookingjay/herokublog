@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
 		$blog = $dashObj->blogAuth($blogID);
 
 		if($blog) {
-			$dashObj->getAllPosts('1', $postLimit, 'Post', '', $blog->blogID);
+			$dashObj->getAllPosts('1', $postLimit, 'Post', $postStatus, $blog->blogID);
 		}
 	}
 }
