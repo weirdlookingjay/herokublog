@@ -112,6 +112,45 @@ nextBtn.addEventListener("click", function(event) {
    }
 });
 
+previousBtn.addEventListener("click", function(event) {
+    var currentNum = currentPage.innerHTML.trim();
+    var lastPageNum = document.querySelector(".p-num > ul").lastElementChild.innerHTML.trim();
+
+
+    if(currentNum > '1') {
+        currentNum--;
+
+        var page = document.querySelector('.p-num > ul').lastElementChild.innerHTML.trim();
+
+        //Ajax request
+        var formData = new FormData();
+        formData.append('blogID', blogID);
+        formData.append('previousPage', currentNum);
+        formData.append('postLimit', 1);
+        formData.append('postStatus', postStatus);
+
+        var httpRequest = new XMLHttpRequest();
+
+        if (httpRequest) {
+            httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showPreviousPosts.php', true);
+            //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showPreviousPosts.php', true);
+            httpRequest.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.querySelector('#posts').innerHTML = this.responseText;
+                    currentPage.innerHTML = currentNum;
+                }
+            }
+        }
+
+        httpRequest.send(formData);
+    }
+
+    if(currentNum == '1') {
+        previousBtn.disabled = true;
+        previousBtn.classList.add('disabled');
+    }
+});
+
 function enableBtn() {
     button.disabled = false;
     button.classList.remove('disabled');
