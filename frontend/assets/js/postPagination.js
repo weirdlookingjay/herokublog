@@ -35,8 +35,8 @@ button.addEventListener("click", function(event) {
            var httpRequest = new XMLHttpRequest();
 
            if (httpRequest) {
-               //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPosts.php', true);
-               httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPosts.php', true);
+               httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPosts.php', true);
+               //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPosts.php', true);
                httpRequest.onreadystatechange = function() {
                    if (this.readyState === 4 && this.status === 200) {
                        document.querySelector('#posts').innerHTML = this.responseText;
@@ -132,8 +132,8 @@ previousBtn.addEventListener("click", function(event) {
         var httpRequest = new XMLHttpRequest();
 
         if (httpRequest) {
-            httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showPreviousPosts.php', true);
-            //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showPreviousPosts.php', true);
+            //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showPreviousPosts.php', true);
+            httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showPreviousPosts.php', true);
             httpRequest.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     document.querySelector('#posts').innerHTML = this.responseText;
@@ -151,9 +151,78 @@ previousBtn.addEventListener("click", function(event) {
     }
 });
 
+postLimit.addEventListener("change", function(e) {
+    var jumpTo = this.value;
+
+    //Ajax request
+    var formData = new FormData();
+    formData.append('blogID', blogID);
+    formData.append('postLimit', jumpTo);
+    formData.append('postStatus', postStatus);
+
+    var httpRequest = new XMLHttpRequest();
+
+    if (httpRequest) {
+        httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/jumpToPost.php', true);
+        //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/jumpToPost.php', true);
+        httpRequest.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                document.querySelector('#posts').innerHTML = this.responseText;
+                currentPage.innerHTML = 1;
+                getPagesNumbers(jumpTo);
+            }
+        }
+    }
+
+    httpRequest.send(formData);
+});
+
+function getPagesNumbers(jumpTo) {
+    //Ajax request
+    var formData = new FormData();
+    formData.append('blogID', blogID);
+    formData.append('postLimit', jumpTo);
+    formData.append('postStatus', postStatus);
+
+    var httpRequest = new XMLHttpRequest();
+
+    if (httpRequest) {
+        httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/getPagesNumbers.php', true);
+        //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/getPagesNumbers.php', true);
+        httpRequest.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                var regex = /(25|50|100)/g;
+                var number = jumpTo.match(regex);
+                var page = document.querySelector("#page-num");
+
+                if(number) {
+                    page.innerHTML = this.responseText;
+
+                    if(page.textContent === "1") {
+                        disableBtn();
+                    } else {
+                        enableBtn();
+                    }
+                }
+            }
+        }
+    }
+
+    httpRequest.send(formData);
+}
+
+
 function enableBtn() {
+    postLimit.disabled = false;
     button.disabled = false;
     button.classList.remove('disabled');
     nextBtn.disabled = false;
     nextBtn.classList.remove('disabled');
+}
+
+function disableBtn() {
+    button.disabled = true;
+    button.classList.add('disabled');
+    nextBtn.disabled = true;
+    nextBtn.classList.add('disabled');
 }
