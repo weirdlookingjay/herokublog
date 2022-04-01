@@ -38,6 +38,11 @@ class Users
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
+    public function redirect($location)  {
+    	$BASE_URL = getenv('BASE_URL');
+        header("Location:".$BASE_URL.$location);
+    }
+
     public function get($table, $fields)
     {
         $where = " WHERE ";
