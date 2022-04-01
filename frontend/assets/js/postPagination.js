@@ -35,8 +35,8 @@ button.addEventListener("click", function(event) {
            var httpRequest = new XMLHttpRequest();
 
            if (httpRequest) {
-               //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPosts.php', true);
-               httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPosts.php', true);
+               httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPosts.php', true);
+               //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPosts.php', true);
                httpRequest.onreadystatechange = function() {
                    if (this.readyState === 4 && this.status === 200) {
                        document.querySelector('#posts').innerHTML = this.responseText;
