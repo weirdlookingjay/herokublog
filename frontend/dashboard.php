@@ -218,11 +218,19 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 
                                             <div class="p-num">
                                                 <ul id="page-num">
-                                                    {PAGE NUMBERS}
+                                                    <?php
+                                                        if(strpos($_SERVER['REQUEST_URI'], '?type=published')) {
+                                                            $dashObj->getPaginationPages('1','Post', 'published', $blog->blogID);
+                                                        } else if(strpos($_SERVER['REQUEST_URI'], '?type=draft')) {
+                                                            $dashObj->getPaginationPages('1','Post', 'draft', $blog->blogID);
+                                                        } else {
+                                                            $dashObj->getPaginationPages('1','Post', '', $blog->blogID);
+                                                        }
+                                                    ?>
                                                 </ul>
                                             </div>
 
-                                            <button class="bl disabled" id="nextPage" disabled="true">
+                                            <button class="bl disabled" id="nextPage" disabled="true" data-blog="<?php echo $blog->blogID; ?>">
                                                 <i class="fas fa-chevron-right"></i>
                                             </button>
 
@@ -243,14 +251,13 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                         <div id="posts" class="main-right-content fl-4">
                             <!-- POSTS -->
                             <?php
-                            if(strpos($_SERVER['REQUEST_URI'], '?type=published')) {
-	                            $dashObj->getAllPosts('Post', 'published', $blog->blogID);
-                            } else if(strpos($_SERVER['REQUEST_URI'], '?type=draft')) {
-	                            $dashObj->getAllPosts('Post', 'draft', $blog->blogID);
-                            } else {
-	                            $dashObj->getAllPosts('Post', '', $blog->blogID);
-                            }
-
+                                if(strpos($_SERVER['REQUEST_URI'], '?type=published')) {
+                                    $dashObj->getAllPosts('Post', 'published', $blog->blogID);
+                                } else if(strpos($_SERVER['REQUEST_URI'], '?type=draft')) {
+                                    $dashObj->getAllPosts('Post', 'draft', $blog->blogID);
+                                } else {
+                                    $dashObj->getAllPosts('Post', '', $blog->blogID);
+                                }
                             ?>
                         </div>
                         <!-- JS FILES -->
@@ -258,6 +265,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/postStatus.js"></script>
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/removePosts.js"></script>
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/searchPosts.js"></script>
+                        <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/postPagination.js"></script>
                     </div>
                     <!--MAIN-Right-inner-DIV-ENDS-HERE-->
                 </div>
