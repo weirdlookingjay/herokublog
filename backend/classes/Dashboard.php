@@ -24,22 +24,28 @@ class Dashboard
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function getAllPosts($type, $status = '', $blogID)
+    public function getAllPosts($offset, $limit, $type, $status = '', $blogID)
     {
         if ($status === "") {
 
             $sql = "SELECT * FROM posts LEFT JOIN users ON userID = authorID
                 WHERE postType = :type AND blogID = :blogID ORDER BY postID
-                DESC LIMIT 10";
+                DESC LIMIT :offset, :postLimit";
         } else {
             $sql = "SELECT * FROM posts LEFT JOIN users ON userID = authorID
         WHERE postType = :type AND postStatus =:status AND blogID = :blogID ORDER BY postID
-        DESC LIMIT 10";
+        DESC LIMIT :offset, :postLimit";
         }
+
+	    if(!empty($offset)) {
+		    $offset = ($offset-1) * $limit;
+	    }
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(":type", $type, PDO::PARAM_STR);
         $stmt->bindParam(":blogID", $blogID, PDO::PARAM_INT);
+        $stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
+        $stmt->bindParam(":postLimit", $limit, PDO::PARAM_INT);
 
         ($status != '') ? $stmt->bindParam(":status", $status, PDO::PARAM_STR) : '';
         $stmt->execute();

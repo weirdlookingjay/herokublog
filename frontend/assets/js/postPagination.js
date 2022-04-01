@@ -5,6 +5,7 @@ var postLimit = document.querySelector('#pageLimit');
 var previousBtn = document.querySelector('#previousPage');
 var nextBtn = document.querySelector('#nextPage');
 var currentPage = document.querySelector('#currentPageNum');
+var postStatus = '';
 var blogID = nextBtn.dataset.blog;
 
 if(page.lastElementChild != null) {
@@ -28,13 +29,14 @@ button.addEventListener("click", function(event) {
            var formData = new FormData();
            formData.append('blogID', blogID);
            formData.append('nextPage', el.innerHTML.trim());
-           formData.append('postLimit', postLimit);
+           formData.append('postLimit', 1);
+           formData.append('postStatus', postStatus);
 
            var httpRequest = new XMLHttpRequest();
 
            if (httpRequest) {
-               httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPosts.php', true);
-               //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPosts.php', true);
+               //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPosts.php', true);
+               httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPosts.php', true);
                httpRequest.onreadystatechange = function() {
                    if (this.readyState === 4 && this.status === 200) {
                        document.querySelector('#posts').innerHTML = this.responseText;
