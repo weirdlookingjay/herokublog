@@ -174,11 +174,11 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 							<ul id="page-num">
 								<?php
 								if(strpos($_SERVER['REQUEST_URI'], '?type=published')) {
-									$dashObj->getPaginationPages('1','Page', 'published', $blog->blogID);
+									$dashObj->getPaginationPages('10','Page', 'published', $blog->blogID);
 								} else if(strpos($_SERVER['REQUEST_URI'], '?type=draft')) {
-									$dashObj->getPaginationPages('1','Page', 'draft', $blog->blogID);
+									$dashObj->getPaginationPages('10','Page', 'draft', $blog->blogID);
 								} else {
-									$dashObj->getPaginationPages('1','Page', '', $blog->blogID);
+									$dashObj->getPaginationPages('10','Page', '', $blog->blogID);
 								}
 								?>
 							</ul>
@@ -205,17 +205,18 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 				<!-- POSTS -->
 				<?php
 				if(strpos($_SERVER['REQUEST_URI'], '?type=published')) {
-					$dashObj->getAllPosts('1', '1','Page', 'published', $blog->blogID);
+					$dashObj->getAllPosts('1', '10','Page', 'published', $blog->blogID);
 				} else if(strpos($_SERVER['REQUEST_URI'], '?type=draft')) {
-					$dashObj->getAllPosts('1', '1','Page', 'draft', $blog->blogID);
+					$dashObj->getAllPosts('1', '10','Page', 'draft', $blog->blogID);
 				} else {
-					$dashObj->getAllPosts('1', '1','Page', '', $blog->blogID);
+					$dashObj->getAllPosts('1', '10','Page', '', $blog->blogID);
 				}
 				?>
  			</div>
  			<!-- JS FILES -->
-            <script src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/pagePagination.js"></script>
-
+            <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/postStatus.js"></script>
+            <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/removePosts.js"></script
+            <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/pagePagination.js"></script>
 		</div><!--MAIN-Right-inner-DIV-ENDS-HERE-->
 		</div><!--MAIN-Right-DIV-ENDS-HERE-->
 	</div>

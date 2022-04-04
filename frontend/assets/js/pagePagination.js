@@ -46,8 +46,8 @@ button.addEventListener("click", function(event) {
             var httpRequest = new XMLHttpRequest();
 
             if (httpRequest) {
-                httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPages.php', true);
-                //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPages.php', true);
+                //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPages.php', true);
+                httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPages.php', true);
                 httpRequest.onreadystatechange = function() {
                     if (this.readyState === 4 && this.status === 200) {
                         document.querySelector('#posts').innerHTML = this.responseText;
@@ -104,8 +104,8 @@ nextBtn.addEventListener("click", function(event) {
         var httpRequest = new XMLHttpRequest();
 
         if (httpRequest) {
-            httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPages.php', true);
-            //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPages.php', true);
+            //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showNextPages.php', true);
+            httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showNextPages.php', true);
             httpRequest.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     document.querySelector('#posts').innerHTML = this.responseText;
@@ -143,8 +143,8 @@ previousBtn.addEventListener("click", function(event) {
         var httpRequest = new XMLHttpRequest();
 
         if (httpRequest) {
-            httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showPreviousPages.php', true);
-            //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showPreviousPages.php', true);
+            //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/showPreviousPages.php', true);
+            httpRequest.open('POST', 'http://herokublog.local/backend/ajax/showPreviousPages.php', true);
             httpRequest.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     document.querySelector('#posts').innerHTML = this.responseText;
@@ -174,8 +174,8 @@ postLimit.addEventListener("change", function(e) {
     var httpRequest = new XMLHttpRequest();
 
     if (httpRequest) {
-        httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/jumpToPage.php', true);
-        //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/jumpToPage.php', true);
+        //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/jumpToPage.php', true);
+        httpRequest.open('POST', 'http://herokublog.local/backend/ajax/jumpToPage.php', true);
         httpRequest.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 document.querySelector('#posts').innerHTML = this.responseText;
@@ -198,8 +198,8 @@ function getPagesNumbers(jumpTo) {
     var httpRequest = new XMLHttpRequest();
 
     if (httpRequest) {
-        httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/getPagesNumbers.php', true);
-        //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/getPagesNumbers.php', true);
+        //httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/getPagesNumbers.php', true);
+        httpRequest.open('POST', 'http://herokublog.local/backend/ajax/getPagesNumbers.php', true);
         httpRequest.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 var regex = /(25|50|100)/g;
