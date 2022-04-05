@@ -69,7 +69,7 @@ deleteBtn.addEventListener("click", function(e) {
             }
         }
     } else {
-        alert("No Posts are selected!");
+        alert("No Comments are selected!");
         location.reload(true);
     }
 });
