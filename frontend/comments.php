@@ -4,7 +4,7 @@ include '../backend/init.php';
 if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 	$blogID = (int) $_GET['blogID'];
 	$blog = $dashObj->blogAuth($blogID);
-    echo $dashObj->getAllComments(1, 10, '', $blog->blogID);
+    echo $dashObj->getAllComments(1, 10, 'Published', $blog->blogID);
 	if (!$blog) {
 		$userObj->redirect('404');
 	}
