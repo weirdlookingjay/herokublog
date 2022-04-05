@@ -189,7 +189,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 												</ul>
 											</div>
 
-											<button class="bl disabled" id="nextPage">
+											<button class="bl disabled" id="nextPage" data-blog="<?php echo $blog->blogID ?>">
 												<i class="fas fa-chevron-right"></i>
 											</button>
 											<span>
@@ -214,6 +214,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 						</div>
 
 						<!-- Js files -->
+                        <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/commentsPagination.js"></script>
 					</div>
 					<!--MAIN-Right-inner-DIV-ENDS-HERE-->
 				</div>
