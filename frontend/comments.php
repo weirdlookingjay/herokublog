@@ -185,7 +185,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 
 											<div class="p-num">
 												<ul id="page-num">
-													{PAGE NUMBER}
+                                                    <?php $dashObj->getCommentPages('1','Published',  $blog->blogID); ?>
 												</ul>
 											</div>
 
