@@ -4,7 +4,7 @@ include '../backend/init.php';
 if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 	$blogID = (int) $_GET['blogID'];
 	$blog = $dashObj->blogAuth($blogID);
-
+    echo $dashObj->getAllComments(1, 10, '', $blog->blogID);
 	if (!$blog) {
 		$userObj->redirect('404');
 	}
@@ -209,13 +209,13 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 						<div class="main-right-content fl-4">
 							<!-- Comments -->
 							<div id="posts">
-								<?php $dashObj->getAllComments(1,10,'Published', $blog->blogID);  ?>
+								<?php $dashObj->getAllComments(1,10,'', $blog->blogID);  ?>
 							</div>
 						</div>
 
 						<!-- Js files -->
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/commentsPagination.js"></script>
-                        
+
 					</div>
 					<!--MAIN-Right-inner-DIV-ENDS-HERE-->
 				</div>
