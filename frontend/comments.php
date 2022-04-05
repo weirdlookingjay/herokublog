@@ -215,7 +215,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 
 						<!-- Js files -->
                         <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/commentsPagination.js"></script>
-                        <script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/removeComments.js"></script>
+                        
 					</div>
 					<!--MAIN-Right-inner-DIV-ENDS-HERE-->
 				</div>
