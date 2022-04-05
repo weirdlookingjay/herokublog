@@ -279,22 +279,25 @@ class Dashboard
 
 		}
 
-		public function getCommentPages($postLimit, $type, $blogID) {
-			$sql = "SELECT * FROM `users` `U`, `comments` `C`
-					LEFT JOIN  `posts` `P` ON `P`.`postID` = `C`.`postID`
-					WHERE `U`.`userID` = `P`.`authorID` AND `C`.`status` = :type
-					AND `C`.`blogID` ORDER BY `C`.`commentID` DESC ";
 
-			$stmt = $this->db->prepare($sql);
-			$stmt->bindParam(":type", $type, PDO::PARAM_STR);
-			$stmt->bindParam(":blogID", $blogID, PDO::PARAM_INT);
-			$stmt->execute();
-			$total = $stmt->rowCount();
+	public function getCommentPages($postLimit, $type, $blogID)
+	{
+		$sql = "SELECT * FROM users, comments 
+                LEFT JOIN posts ON posts.postID=comments.postID
+                WHERE users.userID = posts.authorID 
+                AND comments.blogID =:blogID AND comments.status =:type
+                ORDER BY comments.commentID DESC ";
 
-			$pages = ceil($total/$postLimit);
-
-			for($i=1; $i < $pages+1; $i++) {
-				echo '<li class="pageNum">'.$i.'</li>';
-			}
+		$stmt = $this->db->prepare($sql);
+		$stmt->bindParam(":type", $type, PDO::PARAM_STR);
+		$stmt->bindParam(":blogID", $blogID, PDO::PARAM_INT);
+		$stmt->execute();
+		$stmt->fetchAll(PDO::FETCH_OBJ);
+		$total = $stmt->rowCount();
+		$pages = ceil($total / $postLimit);
+		for ($i = 1; $i < $pages + 1; $i++) {
+			echo '<li class="pageNum">' . $i . '</li>';
 		}
+	}
+
 }
