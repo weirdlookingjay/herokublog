@@ -200,7 +200,7 @@ class Dashboard
 
 	public function getAllComments($offset, $limit, $type, $blogID)
 	{
-		$sql = "SELECT * FROM users, herokublogger.comments 
+		$sql = "SELECT * FROM users, comments 
 						 LEFT JOIN posts ON posts.postID=comments.postID
 						 WHERE users.userID = posts.authorID 
 						 AND comments.blogID =:blogID AND comments.status =:type
