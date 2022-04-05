@@ -197,4 +197,85 @@ class Dashboard
 			echo '<li class="pageNum">'.$i.'</li>';
 		}
     }
+
+	public function getAllComments($offset, $limit, $type, $blogID)
+	{
+		$sql = "SELECT * FROM users, herokublogger.comments 
+						 LEFT JOIN posts ON posts.postID=comments.postID
+						 WHERE users.userID = posts.authorID 
+						 AND comments.blogID =:blogID AND comments.status =:type
+						 ORDER BY commentID DESC LIMIT :offset,:postLimit";
+
+		if (!empty($offset)) {
+			$offset = ($offset - 1) * $limit;
+		}
+		$stmt = $this->db->prepare($sql);
+		$stmt->bindParam(":blogID", $blogID, PDO::PARAM_INT);
+		$stmt->bindParam(":type", $type, PDO::PARAM_STR);
+		$stmt->bindParam(":offset", $offset, PDO::PARAM_INT);
+		$stmt->bindParam(":postLimit", $limit, PDO::PARAM_INT);
+		$stmt->execute();
+		$comments = $stmt->fetchAll(PDO::FETCH_OBJ);
+		if ($comments) {
+			foreach ($comments as $comment) {
+				$date = new DateTime($comment->date);
+				echo '<div class="m-r-c-inner">
+					    <div class="posts-wrap">
+					    <div class="posts-wrap-inner">
+					    <div class="post-link flex fl-row">
+					    <div class="post-in-left fl-1 fl-row flex">
+					    <div class="p-in-check">
+					    <input type="checkbox" class="commentCheckBox" data-post="' . $comment->postID . '" data-comment="' . $comment->commentID . '"/>
+					    </div>
+					    <div class="fl-1">
+					    <div class="p-l-head flex fl-row">
+					    <div class="pl-head-left fl-1">
+					    <div class="pl-h-lr-link">
+					    <span>	
+					   ' . $comment->comment . '
+					    </span>
+					    <a href="#">' . $comment->title . '</a>
+					    </div>
+					    </div>
+					    </div>
+					    <div class="p-l-footer">
+					    <ul>' . (($comment->status === "Pending") ?
+											'<li>
+					    <a href="javascript:;" id="publishComment" data-post="' . $comment->postID . '" data-comment="' . $comment->commentID . '">Publish</a>
+					    </li>' : '<li>
+					    <a href="javascript:;"id="deleteComment" data-post="' . $comment->postID . '" data-comment="' . $comment->commentID . '">Delete</a>
+					    </li> ') . '    </ul>
+					    </div>
+					    </div>
+					    </div>
+					    <div class="post-in-right">
+					    <div class="p-in-right flex fl-1">
+					    <div class="pl-auth-name">
+					    <span>
+					    <a href="#">' . $comment->name . '</a>
+					    </span>
+					    </div>
+					    <div class="pl-post-date">
+					    <span>' . $date->format('d/m/Y') . '</span>
+					    </div> 
+					    </div>
+					    </div>
+					    </div>
+					    </div>
+					    </div>
+					    </div>';
+								}
+							} else {
+								echo '<div class="posts-wrap">
+					            <div class="posts-wrap-inner">
+					                <div class="nopost flex">
+					                    <div>
+					                        <p>There are no comments.
+					                    </div>
+					                </div>
+					            </div>
+					            </div>';
+							}
+
+		}
 }
