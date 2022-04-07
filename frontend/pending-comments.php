@@ -168,6 +168,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 						</span>
 										</div>
 										<div class="fl-4">
+											<button id="publishBtn" data-blog="<?php echo $blog->blogID; ?>">Publish</button>
 											<button id="commentBtn" data-blog="<?php echo $blog->blogID; ?>">Delete</button>
 										</div>
 									</div>
@@ -216,6 +217,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 						<!-- Js files -->
 						<script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/commentsPagination.js"></script>
 						<script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/removeComments.js"></script>
+						<script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/publishComments.js"></script>
 					</div>
 					<!--MAIN-Right-inner-DIV-ENDS-HERE-->
 				</div>
