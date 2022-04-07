@@ -1,4 +1,4 @@
-var button = document.querySelector(#publishBtn);
+var button = document.querySelector('#publishBtn');
 var blogID = button.dataset.blog;
 
 button.addEventListener("click", function(event) {
