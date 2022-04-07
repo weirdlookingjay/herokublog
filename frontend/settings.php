@@ -213,7 +213,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 													<div class="blog-author">
 														<div class="ba-inner flex fl-c" id="authorList">
 															<!-- Authors -->
-															<?php echo $blog->Title; ?>
+															<?php $dashObj->getAuthorList($blog->blogID); ?>
 														</div>
 													</div>
 													<div style="padding-top: 10px; padding-bottom: 10px;">
