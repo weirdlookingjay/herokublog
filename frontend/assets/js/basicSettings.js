@@ -1,4 +1,4 @@
-var blog = document.querySelector("#titleBtn");
+var button = document.querySelector("#titleBtn");
 var block = document.querySelector("titleBlock");
 var cancelBtn = document.querySelector("titleCancelBtn");
 var saveBtn = document.querySelector("titleSaveBtn");
