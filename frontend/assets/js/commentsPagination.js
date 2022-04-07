@@ -9,6 +9,10 @@ var active = document.querySelector("#active");
 var postStatus = 'Published';
 var blogID = nextBtn.dataset.blog;
 
+if(location.href.match(/Pending/gi)) {
+    postStatus = 'Pending';
+}
+
 
 if(page.lastElementChild != null) {
     if(page.lastElementChild.innerHTML.trim() > 1) {
@@ -189,8 +193,8 @@ function getPagesNumbers(jumpTo) {
     var httpRequest = new XMLHttpRequest();
 
     if (httpRequest) {
-        httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/getPagesNumbers.php', true);
-        //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/getPagesNumbers.php', true);
+        httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/getCommentPages.php', true);
+        //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/getCommentPages.php', true);
         httpRequest.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
                 var regex = /(25|50|100)/g;
