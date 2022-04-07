@@ -5,10 +5,6 @@ class Database
     protected $pdo;
     protected static $instance;
 
-//    protected function __construct() {
-//        $this->pdo = new PDO("mysql:host=".getenv('DB_HOST')."; dbname=".getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASS'));
-//    }
-
 	protected function __construct() {
 		$this->pdo = new PDO("mysql:host=".getenv('JAWSDB_HOST')."; dbname=".getenv('JAWSDB_NAME'), getenv('JAWSDB_USER'), getenv('JAWSDB_PASS'));
 	}
