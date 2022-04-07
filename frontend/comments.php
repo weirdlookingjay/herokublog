@@ -168,7 +168,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 						</span>
 										</div>
 										<div class="fl-4">
-											<button id="commentBtn">Delete</button>
+											<button id="commentBtn" data-blog="<?php echo $blog->blogID; ?>">Delete</button>
 										</div>
 									</div>
 								</div>

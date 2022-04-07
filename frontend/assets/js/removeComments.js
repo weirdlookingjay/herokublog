@@ -10,6 +10,7 @@ deleteLink.forEach(function(el){
             formData.append("postID", el.dataset.post);
             formData.append("commentID", el.dataset.comment);
             formData.append("blogID", blogID);
+            
             var httpRequest = new XMLHttpRequest();
             if(httpRequest){
                 httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/removeComments.php', true);
@@ -29,7 +30,7 @@ deleteLink.forEach(function(el){
         }
     });
 });
-///////////////////////////
+
 deleteBtn.addEventListener("click",function(e){
     var checkBox = document.querySelectorAll(".commentCheckBox");
     var postIDs = new Array();
@@ -46,6 +47,7 @@ deleteBtn.addEventListener("click",function(e){
             formData.append("postIDs", JSON.stringify(postIDs));
             formData.append("commentIDs", JSON.stringify(commentIDs));
             formData.append("blogID", blogID);
+
             var httpRequest = new XMLHttpRequest();
             if(httpRequest){
                 httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/removeComments.php', true);
