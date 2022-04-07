@@ -120,11 +120,11 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 								</li>
 
 								<ul>
-									<li class="active">
+									<li>
 										<a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/dashboard/comments">Published</a>
 									</li>
 
-									<li>
+									<li class="active">
 										<a href="<?php echo getenv('BASE_URL'); ?>admin/blogID/<?php echo $blog->blogID; ?>/dashboard/pending/comments">Awaiting moderation</a>
 									</li>
 								</ul>
@@ -185,7 +185,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 
 											<div class="p-num">
 												<ul id="page-num">
-													<?php $dashObj->getCommentPages('1','Published',  $blog->blogID); ?>
+													<?php $dashObj->getCommentPages('1','Pending',  $blog->blogID); ?>
 												</ul>
 											</div>
 
