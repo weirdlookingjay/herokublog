@@ -220,11 +220,11 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                                                 <ul id="page-num">
                                                     <?php
                                                         if(strpos($_SERVER['REQUEST_URI'], '?type=published')) {
-                                                            $dashObj->getPaginationPages('1','Post', 'published', $blog->blogID);
+                                                            $dashObj->getPaginationPages('10','Post', 'published', $blog->blogID);
                                                         } else if(strpos($_SERVER['REQUEST_URI'], '?type=draft')) {
-                                                            $dashObj->getPaginationPages('1','Post', 'draft', $blog->blogID);
+                                                            $dashObj->getPaginationPages('10','Post', 'draft', $blog->blogID);
                                                         } else {
-                                                            $dashObj->getPaginationPages('1','Post', '', $blog->blogID);
+                                                            $dashObj->getPaginationPages('10','Post', '', $blog->blogID);
                                                         }
                                                     ?>
                                                 </ul>
@@ -252,11 +252,11 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
                             <!-- POSTS -->
                             <?php
                                 if(strpos($_SERVER['REQUEST_URI'], '?type=published')) {
-                                    $dashObj->getAllPosts('1', '1','Post', 'published', $blog->blogID);
+                                    $dashObj->getAllPosts('1', '10','Post', 'published', $blog->blogID);
                                 } else if(strpos($_SERVER['REQUEST_URI'], '?type=draft')) {
-                                    $dashObj->getAllPosts('1', '1','Post', 'draft', $blog->blogID);
+                                    $dashObj->getAllPosts('1', '10','Post', 'draft', $blog->blogID);
                                 } else {
-                                    $dashObj->getAllPosts('1', '1','Post', '', $blog->blogID);
+                                    $dashObj->getAllPosts('1', '10','Post', '', $blog->blogID);
                                 }
                             ?>
                         </div>
