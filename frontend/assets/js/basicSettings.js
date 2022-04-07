@@ -54,46 +54,43 @@ var descCancelBtn = document.querySelector("#descCancelBtn");
 var descSaveBtn = document.querySelector("#descSaveBtn");
 var descBox = document.querySelector("#descBox");
 
-descBtn.addEventListener("click", function(event) {
-   descBlock.style.display = "block";
+descBtn.addEventListener("click",function(event){
+   descBlock.style.display="block";
+   descCancelBtn.addEventListener("click",function(event){
+      descBlock.style.display="none";
 
-   descCancelBtn.addEventListener("click", function(event) {
-      descBlock.style.display = "none";
    });
 
-   descSaveBtn.addEventListener("click", function(event) {
-      var descText = document.querySelector("#descInput");
-
-      if(descText.value.trim().lengt != "") {
-         if(descText.value.trim().length < 500) {
-            var formData = new FormData();
-
-            formData.append("description", descText.value.trim());
-            formData.append("blogID", blogID);
-
-            var httpRequest = new XMLHttpRequest();
-
-            if (httpRequest) {
-               httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/updateDescription.php', true);
-               //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/updateDescription.php', true);
-               httpRequest.onreadystatechange = function () {
-                  if (this.readyState === 4 && this.status === 200) {
-                     if (/OwnerError$/i.exec(this.responseText)) {
-                        alert("You cannot perform this action!");
-                        location.reload(true);
-                     } else {
-                        this.value = this.responseText;
-                     }
-
-                     descBlock.style.display = "none";
-                     descBox.innerHTML = descText.value;
+   descSaveBtn.addEventListener("click",function(event){
+      descText =document.querySelector("#descInput");
+      if(descText.value.trim().length <'500'){
+         var formData  = new FormData();
+         formData.append("description", descText.value.trim());
+         formData.append("blogID", blogID);
+         var httpRequest = new XMLHttpRequest();
+         if(httpRequest){
+            httpRequest.open('POST', 'https://blog-coder.herokuapp.com/backend/ajax/updateDescription.php', true);
+            //httpRequest.open('POST', 'http://herokublog.local/backend/ajax/updateDescription.php', true);
+            httpRequest.onreadystatechange = function(){
+               if(this.readyState === 4 && this.status === 200){
+                  if(/OwnnerError$/i.exec(this.responseText)){
+                     alert("You cannot perform this action!");
+                     location.reload();
+                  }else{
+                     this.value=this.responseText;
                   }
+                  descBlock.style.display="none";
+                  descBox.innerHTML = descText.value;
                }
-               httpRequest.send(formData);
             }
-         } else {
-            document.querySelector("#descError").innerHTML = "Must be at most 500 characters!";
+            httpRequest.send(formData);
          }
+      }else{
+         document.querySelector("#descError").innerHTML="Must be at most 500 characters!";  //<div class="bt-error" id="descError">
       }
+
+
    });
+
 });
+
