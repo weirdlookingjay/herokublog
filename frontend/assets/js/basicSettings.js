@@ -1,8 +1,8 @@
 var button = document.querySelector("#titleBtn");
 var block = document.querySelector("#titleBlock");
-var cancelBtn = document.querySelector("titleCancelBtn");
-var saveBtn = document.querySelector("titleSaveBtn");
-var titleBox = document.querySelector("titleBox");
+var cancelBtn = document.querySelector("#titleCancelBtn");
+var saveBtn = document.querySelector("#titleSaveBtn");
+var titleBox = document.querySelector("#titleBox");
 
 button.addEventListener("click", function(event) {
    block.style.display = "block";
