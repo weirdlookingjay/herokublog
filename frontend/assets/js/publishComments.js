@@ -48,7 +48,7 @@ publishLink.forEach(function(el) {
 
         var formData = new FormData();
 
-        formData.append("postIDs", el.dataset.post);
+        formData.append("postID", el.dataset.post);
         formData.append("commentID", el.dataset.comment);
         formData.append("blogID", blogID);
 
