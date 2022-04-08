@@ -1,1 +1,7 @@
-{}
+{
+  "scripts": {
+    "compile": [
+      "chmod 755 /app/frontend/content/"
+    ]
+  }
+}
