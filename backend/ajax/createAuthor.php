@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
 
 		if(!empty($email) && !empty($name) && !empty($pass) && !empty($passRe)) {
 			if(Validate::filterEmail($email)) {
-				if($userObj->emailExist($email)) {
+				if(!$userObj->emailExist($email)) {
 					if($pass === $passRe) {
 						$password = $userObj->hash($pass);
 						if(!empty($_FILES['file']['name'][0])) {
