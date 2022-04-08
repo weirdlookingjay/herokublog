@@ -263,7 +263,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 														</div>
 														<div class="bn-button">
 															<input type="file" id="file" name="file">
-															<button class="btn-newp" id="formSave">Save changes</button>
+															<button class="btn-newp" id="formSave" data-blog="<?php echo $blog->blogID; ?><">Save changes</button>
 															<button class="cancel-btn" id="formClose">Cancel</button>
 														</div>
 													</div>
@@ -546,6 +546,7 @@ if(isset($_GET['blogID']) && !empty($_GET['blogID'])) {
 					</div>
 					<!-- js files -->
 					<script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/basicSettings.js"></script>
+					<script type="text/javascript" src="<?php echo getenv('BASE_URL'); ?>frontend/assets/js/setAuthor.js"></script>
 				</div>
 				<!--MAIN-Right-DIV-ENDS-HERE-->
 			</div>
