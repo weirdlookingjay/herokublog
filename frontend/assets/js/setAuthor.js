@@ -2,10 +2,10 @@ var formBtn = document.querySelector("#authorBtn");
 
 formBtn.addEventListener("click", function(event) {
    document.querySelector(".au-main").style.display = "block";
-   var formSaveBtn = document.querySelector("formSave");
+   var formSaveBtn = document.querySelector("#formSave");
 
    formSaveBtn.addEventListener("click", function(event) {
-       var blogID = this.dataset.blog;
+      var blogID = this.dataset.blog;
       var email = document.querySelector("#emailInput");
       var name = document.querySelector("#nameInput");
       var pass = document.querySelector("#passInput");
