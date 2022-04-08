@@ -17,6 +17,11 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
 						$password = $userObj->hash($pass);
 						if(!empty($_FILES['file']['name'][0])) {
 							// Upload Image
+							$image = $userObj->uploadImage($_FILES['file']);
+							if(!$image) {
+								echo $userObj->imageError();
+								exit;
+							}
 						} else {
 							$image = "frontend/assets/images/avatar.png";
 						}
